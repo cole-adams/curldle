@@ -1,6 +1,4 @@
-import styles from './Game.module.css'
-
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import Scoreboard from './Scoreboard';
 
 import { isValid, getFinalScore, evaluate } from '../services/GameEngine'

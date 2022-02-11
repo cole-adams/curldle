@@ -44,7 +44,7 @@ export default function Scoreboard(props) {
                 const topVals = []
                 const botVals = []
                 for (let j = 0; j < inputRefs.current.length; j++) {
-                    if (j%2==0) {
+                    if (j%2===0) {
                         topVals.push(inputRefs.current[j].value)
                     } else {
                         botVals.push(inputRefs.current[j].value)
@@ -57,7 +57,8 @@ export default function Scoreboard(props) {
                     inputRefs.current[i-1].focus()
                 }
                 break;
-            case 'Tab':
+            default:
+                break;
         }
     }
 
