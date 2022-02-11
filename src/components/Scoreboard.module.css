@@ -1,0 +1,11 @@
+.container {
+    display:flex;
+    margin-bottom: 12px;
+}
+
+.input {
+    width: 24px;
+    background-color: var(--background);
+    color: var(--text-color);
+    border: none;
+}
