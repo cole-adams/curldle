@@ -43,35 +43,32 @@ export default function Game(props) {
         }
     }
 
-    function renderScoreboards() {
-        const scoreboardEls = []
-        for (let i = 0; i < 6; i++) {
-            if (i === currentInput) {
-                scoreboardEls.push(
-                    <Scoreboard
-                        key={i}
-                        type="input"
-                        submit={handleSubmit}
-                        finalScore={finalScore}
-                    />
-                )
-            } else {
-                scoreboardEls.push(
-                    <Scoreboard
-                        key={i}
-                        type="display"
-                        score={scoreboards[i]}
-                        finalScore={finalScore}
-                    />
-                )
-            }
+    const scoreboardEls = []
+    for (let i = 0; i < 6; i++) {
+        if (i === currentInput) {
+            scoreboardEls.push(
+                <Scoreboard
+                    key={i}
+                    type="input"
+                    submit={handleSubmit}
+                    finalScore={finalScore}
+                />
+            )
+        } else {
+            scoreboardEls.push(
+                <Scoreboard
+                    key={i}
+                    type="display"
+                    score={scoreboards[i]}
+                    finalScore={finalScore}
+                />
+            )
         }
-        return scoreboardEls
     }
 
     return (
         <div>
-            {renderScoreboards()}
+            {scoreboardEls}
             <Toaster
                 position="top-center"
             />

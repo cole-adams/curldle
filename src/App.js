@@ -2,11 +2,12 @@ import './App.css';
 
 import React from 'react';
 import Game from './components/Game';
+import Header from './components/Header';
 
 function App() {
   return (
     <div className="App">
-      <h1>CURLDLE</h1>
+      <Header />
       <Game />
     </div>
   )

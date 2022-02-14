@@ -1,0 +1,11 @@
+.icon {
+    cursor: pointer;
+}
+
+.seperator {
+    border-color: var(--tile-border);
+    border-style: solid;
+    border-width: 1px;
+    background-color: var(--tile-border);
+    margin: 0;
+}

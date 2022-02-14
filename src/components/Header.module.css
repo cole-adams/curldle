@@ -1,0 +1,16 @@
+.container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 64px auto 64px;
+}
+
+.title {
+    grid-column-start: 2;
+    place-self: center;
+}
+
+.icon {
+    grid-column-start: 1;
+    place-self: center;
+}
+

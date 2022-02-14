@@ -1,9 +1,23 @@
-const score = [[0,1,0,0,0,2,0,2],
-                [0,0,0,0,1,0,1,0]];
+import games from '../data/games.json';
 
 const sum = (pre, cur) => pre+cur;
 
+function getScore() {
+    const now = new Date();
+    const daysSinceEpoch = Math.floor(now/8.64e7) //number of milliseconds in a day
+    
+    const game = games.games[daysSinceEpoch % games.games.length]
+
+    const scoresAsNum = game.map(arr => {
+        return arr.map(item => {
+            return parseInt(item)
+        })
+    })
+    return scoresAsNum;
+}
+
 function getFinalScore() {
+    const score = getScore()
     return {
         top: score[0].reduce(sum),
         bottom: score[1].reduce(sum)
@@ -55,6 +69,7 @@ function isValid(top, bottom) {
 }
 
 function evaluate(topStr, bottomStr) {
+    const score = getScore()
     const top = topStr.map(item => Number.parseInt(item))
     const bottom = bottomStr.map(item => Number.parseInt(item))
 
