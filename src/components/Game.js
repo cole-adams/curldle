@@ -4,12 +4,28 @@ import Scoreboard from './Scoreboard';
 import { isValid, getFinalScore, evaluate } from '../services/GameEngine'
 import toast, { Toaster } from 'react-hot-toast';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { completeGame, submitGuess } from '../features/statistics/statisticsSlice';
+
 export default function Game(props) {
-    const _scoreboards = Array(6).fill(Array(8).fill({top:'', bottom: ''}));
-    const [currentInput, setCurrentInput] = useState(0)
-    const [scoreboards, setScoreboards] = useState(
-        _scoreboards
-    )
+    const lastPlayed = useSelector((state) => state.statistics.lastPlayed)
+    const currentGame = useSelector((state) => state.statistics.currentGame)
+    const dispatch = useDispatch()
+
+    const currentDate = (new Date()).toISOString().substring(0,10);
+    
+    let _scoreboards;
+    let _input;
+    if (currentDate === lastPlayed) {
+        _scoreboards = currentGame.boards
+        _input = currentGame.input
+    } else {
+        _scoreboards = Array(6).fill(Array(8).fill({top:'', bottom: ''}));
+        _input = 0
+    }
+
+    const [currentInput, setCurrentInput] = useState(_input)
+    const [scoreboards, setScoreboards] = useState(_scoreboards)
 
     const finalScore = getFinalScore();
 
@@ -24,7 +40,6 @@ export default function Game(props) {
             return;
         }
 
-
         const { evalArr, hasWon } = evaluate(topScores, bottomScores)
 
         const newScores = scoreboards.slice(0)
@@ -38,7 +53,26 @@ export default function Game(props) {
                 color: '#fff',
               }});
             setCurrentInput(-1)
+            dispatch(completeGame({
+                win: true,
+                guesses: currentInput+1,
+            }))
+            dispatch(submitGuess({
+                currentGame: {
+                    input: -1,
+                    boards: newScores
+                },
+                lastPlayed: currentDate
+            }))
+        } else if (currentInput === 5) {
         } else {
+            dispatch(submitGuess({
+                currentGame: {
+                    input: currentInput+1,
+                    boards: newScores,
+                },
+                lastPlayed: currentDate
+            }))
             setCurrentInput(currentInput+1)
         }
     }

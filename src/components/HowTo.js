@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import Icon from "@mdi/react"
 import { mdiHelpCircleOutline } from "@mdi/js"
 import Modal from "./Modal"
@@ -18,7 +18,14 @@ const exampleScoreboard = [
 ]
 
 export default function HowTo() {
-    const [showModal, setShowModal] = useState(true);
+    const [showModal, setShowModal] = useState(() => {
+        const saved = JSON.parse(localStorage.getItem("firstTime"));
+        return saved===null
+    });
+
+    useEffect(() => {
+        localStorage.setItem("firstTime", JSON.stringify(false))
+    }, [])
 
     function toggleModal() {
         setShowModal(!showModal);

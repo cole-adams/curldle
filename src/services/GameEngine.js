@@ -4,7 +4,8 @@ const sum = (pre, cur) => pre+cur;
 
 function getScore() {
     const now = new Date();
-    const daysSinceEpoch = Math.floor(now/8.64e7) //number of milliseconds in a day
+    const timezoneOffsetMS = now.getTimezoneOffset() * 6e4
+    const daysSinceEpoch = Math.floor((now-timezoneOffsetMS)/8.64e7) //number of milliseconds in a day
     
     const game = games.games[daysSinceEpoch % games.games.length]
 
