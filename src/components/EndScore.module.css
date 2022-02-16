@@ -1,6 +1,6 @@
 .scene {
-    width: 40px;
-    height: 100px;
+    width: 36px;
+    height: 89px;
     perspective: none;
 }
 
@@ -47,11 +47,13 @@
 
 .score {
     margin: 4px;
-    height: 24px;
+    height: 20px;
+    font-size: 1em
 }
 
 .end-title {
     margin: 4px 0px;
+    font-size: 0.8em;
 }
 
 .correct {
