@@ -16,3 +16,21 @@
 .input:focus{
     outline: none;
 }
+
+.submit {
+    background-color: var(--color-correct);
+    color: white;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    height: 36px;
+    margin-bottom: 12px;
+    -webkit-tap-highlight-color: rgba(0,0,0,0.3);
+}
+
+.submit:hover {
+    opacity: 0.9;
+}

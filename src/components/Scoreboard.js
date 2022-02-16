@@ -48,16 +48,7 @@ export default function Scoreboard(props) {
     function handleKeyDown(event, i) {
         switch (event.key) {
             case 'Enter':
-                const topVals = []
-                const botVals = []
-                for (let j = 0; j < inputRefs.current.length; j++) {
-                    if (j%2===0) {
-                        topVals.push(inputRefs.current[j].value)
-                    } else {
-                        botVals.push(inputRefs.current[j].value)
-                    }
-                }
-                props.submit(topVals, botVals)
+                submit()
                 break;
             case 'Backspace':
                 if (i > 0 && event.target.value === "") {
@@ -72,6 +63,19 @@ export default function Scoreboard(props) {
                 }
                 break;
         }
+    }
+
+    function submit() {
+        const topVals = []
+        const botVals = []
+        for (let j = 0; j < inputRefs.current.length; j++) {
+            if (j%2===0) {
+                topVals.push(inputRefs.current[j].value)
+            } else {
+                botVals.push(inputRefs.current[j].value)
+            }
+        }
+        props.submit(topVals, botVals)
     }
 
     function renderEndScores() {
@@ -91,6 +95,7 @@ export default function Scoreboard(props) {
     }
 
     return (
+        <>
         <div className={styles.container}>
             {renderEndScores()}
             <EndScore
@@ -101,5 +106,12 @@ export default function Scoreboard(props) {
                 evaluation="correct"
             />
         </div>
+        { props.type === 'input' && 
+            <button
+                className={styles.submit}
+                onClick={submit}
+            >Submit</button>
+        }
+        </>
     )
 }
