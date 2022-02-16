@@ -23,6 +23,7 @@
     height: 100%;
     width: 100%;
     backface-visibility: hidden;
+    border-radius: 3px;
 }
 
 .face__front {
