@@ -1,3 +1,8 @@
+.title {
+    margin: 0;
+    margin-bottom: 12px;
+}
+
 .icon {
     cursor: pointer;
 }
@@ -7,5 +12,5 @@
     border-style: solid;
     border-width: 1px;
     background-color: var(--tile-border);
-    margin: 0;
+    margin: 12px 0px;
 }

@@ -27,11 +27,14 @@
 }
 
 .display-block {
-    display: flex;
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s, opacity 0.1s ease-in;
 }
 
 .display-none {
-    display: none;
+    visibility: hidden;
+    opacity: 0;
 }
 
 .close {

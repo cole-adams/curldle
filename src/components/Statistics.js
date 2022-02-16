@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import Icon from "@mdi/react"
 import { mdiChartBar, mdiShareVariant } from "@mdi/js"
 
@@ -22,6 +22,14 @@ export default function Statistics() {
     const hasWon = useSelector((state) => state.statistics.hasWon)
 
     const currentGame = useSelector((state) => state.statistics.currentGame)
+
+    useEffect(() => {
+        if (gameFinished) {
+            setTimeout(() => {
+                setShowModal(true)
+            }, 1000)
+        }
+    }, [gameFinished])
 
     function toggleModal() {
         setShowModal(!showModal);
@@ -50,11 +58,7 @@ export default function Statistics() {
         result+="\nhttps://curldle.netlify.com"
         navigator.clipboard.writeText(result)
         toast('Copied!', {
-            icon: '📋',
-            style: {
-                background: '#333',
-                color: '#fff',
-            }
+            icon: '📋'
         })   
     }
 

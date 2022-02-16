@@ -58,7 +58,7 @@ export default function Game(props) {
                         finalScore={finalScore}
                     />
                 </div>
-            ), toastStyle)
+            ), {style: {maxWidth: 'none'}})
         }
         if (hasWon || currentInput===5) {
             setCurrentInput(-1)

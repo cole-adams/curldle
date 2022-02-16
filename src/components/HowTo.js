@@ -33,7 +33,7 @@ export default function HowTo() {
 
     const modalContent = (
         <div>
-            <h1>How To Play</h1>
+            <h2 className={styles.title}>How To Play</h2>
             <p>Guess the score in six tries.</p>
             <p>Each guess must be a valid score. Meaning: </p>
             <ol>
@@ -45,7 +45,7 @@ export default function HowTo() {
             <p>Every game is a full 8-end game (no conceded games or extra ends).</p>
             <p>After each guess, the color of the tiles will change to show how close your guess was to the score.</p>
             <hr className={styles.seperator} ></hr>
-            <h3>Example</h3>
+            <h3 className={styles.title}>Example</h3>
             <Scoreboard 
                 type="display"
                 score={exampleScoreboard}
