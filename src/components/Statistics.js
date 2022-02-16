@@ -36,10 +36,10 @@ export default function Statistics() {
                 let emoji;
                 switch(square.eval) {
                     case 'correct':
-                        emoji = '🟩'
+                        emoji = '🟦'
                         break;
                     case 'present':
-                        emoji = '🟨'
+                        emoji = '🟥'
                         break;
                     default:
                         emoji = '⬛'
@@ -58,7 +58,7 @@ export default function Statistics() {
         })   
     }
 
-    const winPercent = Math.round((wins/played)*100);
+    const winPercent = played === 0? 0 : Math.round((wins/played)*100);
 
     const modalContent = (
         <div className={styles.container}>

@@ -5,7 +5,14 @@
 
 .input {
     width: 24px;
-    background-color: var(--background);
-    color: var(--text-color);
+    background-color: var(--tile-background);
+    color: white;
+    font-weight: bold;
+    font-size: 1.17em;
     border: none;
+    text-align: center;
+}
+
+.input:focus{
+    outline: none;
 }

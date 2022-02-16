@@ -23,6 +23,7 @@
     max-width: var(--game-max-width);
     margin-top: auto;
     margin-bottom: auto;
+    border-radius: 10px;
 }
 
 .display-block {

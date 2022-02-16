@@ -18,7 +18,10 @@ export default function Scoreboard(props) {
                         ref={el => inputRefs.current[(2*i+bot)] = el}
                         className={styles.input}
                         onKeyDown={e => { handleKeyDown(e, (2*i+bot))}}
-                        onChange={e => { handleUpdate(e, (2*i+bot))}}
+                        onInput={e => { handleUpdate(e, (2*i+bot))}}
+                        onFocus={handleFocus}
+                        maxLength={1}
+                        pattern="[0-9]*"
                     />
                 )
             }
@@ -36,6 +39,10 @@ export default function Scoreboard(props) {
         if (i < 15 && event.target.value !== "") {
             inputRefs.current[i+1].focus()
         }
+    }
+
+    function handleFocus(event) {
+        event.target.select()
     }
 
     function handleKeyDown(event, i) {
@@ -57,7 +64,12 @@ export default function Scoreboard(props) {
                     inputRefs.current[i-1].focus()
                 }
                 break;
+            case 'Tab':
+                break;
             default:
+                if (!/[0-8]/.test(event.key)) {
+                    event.preventDefault()
+                }
                 break;
         }
     }
@@ -86,6 +98,7 @@ export default function Scoreboard(props) {
                 end="Total"
                 top={props.finalScore.top}
                 bottom={props.finalScore.bottom}
+                evaluation="correct"
             />
         </div>
     )

@@ -5,6 +5,7 @@
     color: white;
     text-align: center;
     margin: -1px;
+    background-color: var(--tile-background);
 }
 
 .seperator {
@@ -25,13 +26,13 @@
 }
 
 .correct {
-    background-color: var(--color-correct);
+    background-color: var(--color-correct) !important;
 }
 
 .present {
-    background-color: var(--color-present);
+    background-color: var(--color-present) !important;
 }
 
 .none {
-    background-color: var(--tile-border);
+    background-color: var(--color-none) !important;
 }

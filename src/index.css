@@ -1,10 +1,11 @@
 * {
-  --background: #121213;
-  --color-present: #b59f3b;
-  --color-correct: #538d4e;
-  --key-bg: #818384;
-  --text-color: #d7dadc;
-  --tile-border: #3a3a3c;
+  --background: #ECF0F1;
+  --color-present: #E74C3C;
+  --color-correct: #3498DB;
+  --color-none: #2C3E50;
+  --text-color: #2C3E50;
+  --tile-border: #34495E;
+  --tile-background: #95A5A6;
   --game-max-width: 500px;
 }
 

@@ -30,10 +30,7 @@ export default function Game(props) {
 
     const finalScore = getFinalScore();
 
-    const toastStyle = {style: {
-        background: '#333',
-        color: '#fff',
-    }};
+    const toastStyle = {};
 
     function handleSubmit(topScores, bottomScores) {
         const verify = isValid(topScores, bottomScores)
