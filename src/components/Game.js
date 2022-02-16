@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import Scoreboard from './Scoreboard';
 
-import { isValid, getFinalScore, evaluate } from '../services/GameEngine'
+import { isValid, getFinalScore, evaluate, getScore } from '../services/GameEngine'
 import toast, { Toaster } from 'react-hot-toast';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { completeGame, submitGuess } from '../features/statistics/statisticsSlice';
+import { startGame, completeGame, submitGuess } from '../features/statistics/statisticsSlice';
 
 export default function Game(props) {
     const lastPlayed = useSelector((state) => state.statistics.lastPlayed)
@@ -20,6 +20,7 @@ export default function Game(props) {
         _scoreboards = currentGame.boards
         _input = currentGame.input
     } else {
+        dispatch(startGame())
         _scoreboards = Array(6).fill(Array(8).fill({top:'', bottom: ''}));
         _input = 0
     }
@@ -29,14 +30,16 @@ export default function Game(props) {
 
     const finalScore = getFinalScore();
 
+    const toastStyle = {style: {
+        background: '#333',
+        color: '#fff',
+    }};
+
     function handleSubmit(topScores, bottomScores) {
         const verify = isValid(topScores, bottomScores)
 
         if (!verify.isValid) {
-            toast.error(verify.message, {style: {
-                background: '#333',
-                color: '#fff',
-              }})
+            toast.error(verify.message, toastStyle)
             return;
         }
 
@@ -48,26 +51,36 @@ export default function Game(props) {
         setScoreboards(newScores)
 
         if (hasWon) {
-            toast.success('Genius!', {style: {
-                background: '#333',
-                color: '#fff',
-              }});
+            toast.success('Genius!', toastStyle);
+        } else if (currentInput === 5) {
+            toast((t) => (
+                <div>Correct Score:
+                    <Scoreboard
+                        type="display"
+                        score={getScore()}
+                        finalScore={finalScore}
+                    />
+                </div>
+            ), toastStyle)
+        }
+        if (hasWon || currentInput===5) {
             setCurrentInput(-1)
             dispatch(completeGame({
-                win: true,
-                guesses: currentInput+1,
+                win: hasWon,
+                guesses: ''+ (currentInput+1),
             }))
             dispatch(submitGuess({
                 currentGame: {
+                    guesses: currentInput + 1,
                     input: -1,
                     boards: newScores
                 },
                 lastPlayed: currentDate
             }))
-        } else if (currentInput === 5) {
         } else {
             dispatch(submitGuess({
                 currentGame: {
+                    guesses: currentInput+1,
                     input: currentInput+1,
                     boards: newScores,
                 },

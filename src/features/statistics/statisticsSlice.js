@@ -18,19 +18,28 @@ export const statisticsSlice = createSlice({
         },
         currentGame: {
             input: 0,
+            guesses: 0,
             boards: []
-        }
+        },
+        gameFinished: false,
+        hasWon: false
     },
     reducers: {
+        startGame: (state) => {
+            state.gameFinished = false;
+            state.hasWon = false;
+        },
         completeGame: (state, action) => {
+            state.gameFinished = true
             state.played += 1
             state.wins += (action.payload.win?1:0)
+            state.hasWon = action.payload.win
             state.currentStreak += 1
             if (state.currentStreak > state.maxStreak) {
                 state.maxStreak = state.currentStreak
             }
             if (action.payload.win) {
-                state.guessDistribution[action.payload.gueses] += 1
+                state.guessDistribution[action.payload.guesses] += 1
             }
         },
         submitGuess: (state, action) => {
@@ -40,6 +49,6 @@ export const statisticsSlice = createSlice({
     }
 });
 
-export const { completeGame, submitGuess } = statisticsSlice.actions
+export const { startGame, completeGame, submitGuess } = statisticsSlice.actions
 
 export default statisticsSlice.reducer

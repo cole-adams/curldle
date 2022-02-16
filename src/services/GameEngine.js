@@ -2,7 +2,17 @@ import games from '../data/games.json';
 
 const sum = (pre, cur) => pre+cur;
 
-function getScore() {
+function getGameNum() {
+    const firstDay = Date.parse('2022-02-15');
+    
+    const now = new Date();
+    const timezoneOffsetMS = now.getTimezoneOffset() * 6e4
+    
+    const days = Math.floor((now - (firstDay + timezoneOffsetMS))/8.64e7)
+    return days
+}
+
+function getTodaysGame() {
     const now = new Date();
     const timezoneOffsetMS = now.getTimezoneOffset() * 6e4
     const daysSinceEpoch = Math.floor((now-timezoneOffsetMS)/8.64e7) //number of milliseconds in a day
@@ -18,11 +28,24 @@ function getScore() {
 }
 
 function getFinalScore() {
-    const score = getScore()
+    const score = getTodaysGame()
     return {
         top: score[0].reduce(sum),
         bottom: score[1].reduce(sum)
     }
+}
+
+function getScore() {
+    const game = getTodaysGame()
+    const out = []
+    for (let i = 0; i < game[0].length; i++) {
+        out.push({
+            top: game[0][i],
+            bottom: game[1][i]
+        })
+    }
+
+    return out
 }
 
 function isValid(top, bottom) {
@@ -70,7 +93,7 @@ function isValid(top, bottom) {
 }
 
 function evaluate(topStr, bottomStr) {
-    const score = getScore()
+    const score = getTodaysGame()
     const top = topStr.map(item => Number.parseInt(item))
     const bottom = bottomStr.map(item => Number.parseInt(item))
 
@@ -121,4 +144,4 @@ function evaluate(topStr, bottomStr) {
     }
 }
 
-export { isValid, getFinalScore, evaluate }
+export { isValid, getFinalScore, evaluate, getGameNum, getScore }
