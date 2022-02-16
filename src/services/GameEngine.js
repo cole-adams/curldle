@@ -53,11 +53,11 @@ function isValid(top, bottom) {
     const bottomNums = [];
 
     for (let i = 0; i < top.length; i++) {
-        if (top[i] === '' || bottom[i]==='') {
-            return {
-                isValid: false,
-                message: `Invalid. Missing value in end ${i+1}`
-            }
+        if (top[i] === '') {
+            top[i] = '0'
+        }
+        if (bottom[i] === '') {
+            bottom[i] = '0'
         }
         if (top[i]!=='0' && bottom[i]!=='0') {
             return {
