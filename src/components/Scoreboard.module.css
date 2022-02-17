@@ -5,6 +5,7 @@
 
 .input {
     width: 24px;
+    height: 26px;
     background-color: var(--tile-background);
     color: white;
     font-weight: bold;
