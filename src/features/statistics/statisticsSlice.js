@@ -23,6 +23,10 @@ export const statisticsSlice = createSlice({
             }
             state.finished = false;
             state.won = false;
+            state.currentGame = {
+                gameId: action.payload.gameId,
+                gameGuesses: []
+            }
         },
         completeGame: (state, action) => {
             state.finished = true;

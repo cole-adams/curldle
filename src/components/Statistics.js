@@ -32,6 +32,7 @@ export default function Statistics() {
         } else if (showModalTimer) {
             clearTimeout(showModalTimer);
         }
+        //eslint-disable-next-line
     }, [gameFinished])
 
     function toggleModal() {

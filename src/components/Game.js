@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Scoreboard from './Scoreboard';
 
 import { isValid, getFinalScore, evaluate, getScore, getGameId } from '../services/GameEngine'
@@ -9,38 +9,49 @@ import { startGame, completeGame, submitGuess } from '../features/statistics/sta
 
 export default function Game(props) {
     const [gameId] = useState(getGameId())
+
     const lastGameId = useSelector((state) => state.statistics.lastGameId)
     const currentGame = useSelector((state) => state.statistics.currentGame)
     const finished = useSelector((state) => state.statistics.finished)
     const dispatch = useDispatch()
 
-    let _scoreboards;
-    let _input;
+    const restoreScoreboards = () => {
+        let _scoreboards;
 
-    if (gameId === lastGameId) {
-        _scoreboards = [];
+        if (gameId === lastGameId) {
+            _scoreboards = [];
 
-        currentGame.gameGuesses.forEach((item) => {
-            _scoreboards.push(item)
-        })
+            currentGame.gameGuesses.forEach((item) => {
+                _scoreboards.push(item)
+            })
 
-        for (let i = _scoreboards.length; i < 6; i++) {
-            _scoreboards.push(Array(8).fill({top:'', bottom: ''}))
-        }
-
-        if (finished) {
-            _input = -1
+            for (let i = _scoreboards.length; i < 6; i++) {
+                _scoreboards.push(Array(8).fill({top:'', bottom: ''}))
+            }
         } else {
-            _input = currentGame.gameGuesses.length
+            _scoreboards = Array(6).fill(Array(8).fill({top:'', bottom: ''}));
         }
-    } else {
-        dispatch(startGame({gameId}))
-        _scoreboards = Array(6).fill(Array(8).fill({top:'', bottom: ''}));
-        _input = 0
+        return _scoreboards;
     }
 
-    const [currentInput, setCurrentInput] = useState(_input)
-    const [scoreboards, setScoreboards] = useState(_scoreboards)
+    const restoreInput = () => {
+        if (lastGameId === gameId && finished) {
+            return -1
+        } else if (lastGameId === gameId){
+            return currentGame.gameGuesses.length
+        } else {
+            return 0
+        }
+    }
+
+    const [currentInput, setCurrentInput] = useState(restoreInput)
+    const [scoreboards, setScoreboards] = useState(restoreScoreboards)
+
+    useEffect(() => {
+        if (gameId !== lastGameId) {
+            dispatch(startGame({gameId}))
+        }
+    }, [dispatch, gameId, lastGameId])
 
     const finalScore = getFinalScore(gameId);
 
@@ -75,7 +86,6 @@ export default function Game(props) {
             ), {style: {maxWidth: 'none'}})
         }
         if (hasWon || currentInput===5) {
-            console.log(hasWon)
             dispatch(completeGame({
                 win: hasWon,
                 guesses: currentInput+1,
@@ -84,7 +94,6 @@ export default function Game(props) {
         } else {
             setCurrentInput(currentInput+1)
         }
-        console.log(gameId)
         dispatch(submitGuess({
             guess: evalArr,
             id: gameId
