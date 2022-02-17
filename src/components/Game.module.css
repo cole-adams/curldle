@@ -1,0 +1,8 @@
+.toast-wrapper {
+    width: 1vw;
+    height: 1vh;
+    top:0;
+    left:0;
+    z-index: 10;
+    transform: translateZ(10px);
+}

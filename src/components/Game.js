@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Scoreboard from './Scoreboard';
 
 import { isValid, getFinalScore, evaluate, getScore } from '../services/GameEngine'
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { startGame, completeGame, submitGuess } from '../features/statistics/statisticsSlice';
@@ -112,9 +112,6 @@ export default function Game(props) {
 
     return (
         <div>
-            <Toaster
-                position="top-center"
-            />
             {scoreboardEls}
         </div>
     )
