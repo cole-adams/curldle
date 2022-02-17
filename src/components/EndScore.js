@@ -1,17 +1,17 @@
 import React from "react";
 import styles from "./EndScore.module.css"
 
-export default function EndScore(props) {
-    const colorStyle = props.evaluation ? styles[props.evaluation] : '';
-    const flipClass = props.evaluation ? styles['is-flipped'] : '';
+export default function EndScore({end, top, bottom, evaluation}) {
+    const colorStyle = evaluation ? styles[evaluation] : '';
+    const flipClass = evaluation ? styles['is-flipped'] : '';
 
     const tileDisplay = (
         <>
-            <p className={styles["end-title"]}>{props.end}</p>
+            <p className={styles["end-title"]}>{end}</p>
             <hr className={styles.seperator}></hr>
-            <h3 className={styles.score}>{props.top}</h3>
+            <h3 className={styles.score}>{top}</h3>
             <hr className={styles.seperator}></hr>
-            <h3 className={styles.score}>{props.bottom}</h3>
+            <h3 className={styles.score}>{bottom}</h3>
         </>
     )
 
@@ -19,7 +19,7 @@ export default function EndScore(props) {
         <div className={styles.scene}>
             <div className={`${styles.container} ${flipClass}`}>
                 <div className={`${styles["face"]} ${styles["face__front"]}`}>{ tileDisplay }</div>
-                <div className={`${styles["face"]} ${styles["face__back"]} ${colorStyle}`}>{ props.evaluation && tileDisplay }</div>
+                <div className={`${styles["face"]} ${styles["face__back"]} ${colorStyle}`}>{ evaluation && tileDisplay }</div>
             </div>
         </div>
     )

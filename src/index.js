@@ -7,6 +7,12 @@ import { store, persistor } from './app/store'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 
+
+if (!localStorage.getItem("legacy")) {
+  persistor.purge()
+  localStorage.setItem("legacy", false);
+}
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

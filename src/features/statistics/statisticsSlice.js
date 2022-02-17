@@ -3,52 +3,48 @@ import { createSlice } from "@reduxjs/toolkit"
 export const statisticsSlice = createSlice({
     name: 'statistics',
     initialState: {
-        played: 0,
-        lastPlayed: 0,
+        gamesPlayed: 0,
+        lastGameId: 0,
         wins: 0,
         currentStreak: 0,
         maxStreak: 0,
-        guessDistribution: {
-            "1": 0,
-            "2": 0,
-            "3": 0,
-            "4": 0,
-            "5": 0,
-            "6": 0
-        },
+        guessDistribution: [0,0,0,0,0,0],
         currentGame: {
-            gameNum: 0,
-            input: 0,
-            guesses: 0,
-            boards: []
+            gameId: 0,
+            gameGuesses: []
         },
-        gameFinished: false,
-        hasWon: false
+        finished: false,
+        won: false
     },
     reducers: {
         startGame: (state, action) => {
-            state.gameFinished = false;
-            state.hasWon = false;
-            if (!action.payload) {
+            if (!state.won || state.currentGame.lastGameId + 1 !== action.payload.gameId) {
+                state.currentStreak = 0;
+            }
+            state.finished = false;
+            state.won = false;
+        },
+        completeGame: (state, action) => {
+            state.finished = true;
+            state.won = action.payload.win;
+
+            state.gamesPlayed += 1
+
+            if (action.payload.win) {
+                state.wins+=1
+                state.guessDistribution[action.payload.guesses-1]+=1
+                state.currentStreak += 1
+                if (state.currentStreak > state.maxStreak) {
+                    state.maxStreak = state.currentStreak
+                }
+            } else {
                 state.currentStreak = 0
             }
         },
-        completeGame: (state, action) => {
-            state.gameFinished = true
-            state.played += 1
-            state.wins += (action.payload.win?1:0)
-            state.hasWon = action.payload.win
-            state.currentStreak += 1
-            if (state.currentStreak > state.maxStreak) {
-                state.maxStreak = state.currentStreak
-            }
-            if (action.payload.win) {
-                state.guessDistribution[action.payload.guesses] += 1
-            }
-        },
         submitGuess: (state, action) => {
-            state.currentGame = action.payload.currentGame
-            state.lastPlayed = action.payload.lastPlayed
+            state.currentGame.gameGuesses.push(action.payload.guess)
+            state.currentGame.gameId = action.payload.id
+            state.lastGameId = action.payload.id
         }
     }
 });

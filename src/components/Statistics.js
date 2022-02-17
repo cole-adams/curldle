@@ -11,21 +11,26 @@ import { useSelector } from "react-redux"
 
 export default function Statistics() {
     const [showModal, setShowModal] = useState(false)
-    const played = useSelector((state) => state.statistics.played)
+    const played = useSelector((state) => state.statistics.gamesPlayed)
     const wins = useSelector((state) => state.statistics.wins)
     const currentStreak = useSelector((state) => state.statistics.currentStreak)
     const maxStreak = useSelector((state) => state.statistics.maxStreak)
 
-    const gameFinished = useSelector((state) => state.statistics.gameFinished)
-    const hasWon = useSelector((state) => state.statistics.hasWon)
+    const gameFinished = useSelector((state) => state.statistics.finished)
+    const hasWon = useSelector((state) => state.statistics.won)
 
     const currentGame = useSelector((state) => state.statistics.currentGame)
 
+    const [showModalTimer, setShowModalTimer] = useState(null);
+
     useEffect(() => {
         if (gameFinished) {
-            setTimeout(() => {
+            const timer = setTimeout(() => {
                 setShowModal(true)
             }, 1000)
+            setShowModalTimer(timer);
+        } else if (showModalTimer) {
+            clearTimeout(showModalTimer);
         }
     }, [gameFinished])
 
@@ -34,9 +39,9 @@ export default function Statistics() {
     }
 
     function handleClick() {
-        let result = `Curldle ${currentGame.gameNum} ${hasWon?currentGame.guesses:'X'}/6\n`
-        for (let i = 0; i < currentGame.guesses; i++) {
-            const board = currentGame.boards[i]
+        let result = `Curldle ${currentGame.gameId} ${hasWon?currentGame.gameGuesses.length:'X'}/6\n`
+        for (let i = 0; i < currentGame.gameGuesses.length; i++) {
+            const board = currentGame.gameGuesses[i]
             result+='\n'
             for (const square of board) {
                 let emoji;

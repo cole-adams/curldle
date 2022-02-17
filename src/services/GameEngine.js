@@ -2,7 +2,7 @@ import games from '../data/games.json';
 
 const sum = (pre, cur) => pre+cur;
 
-function getGameNum() {
+function getGameId() {
     const firstDay = Date.parse('2022-02-15');
     
     const now = new Date();
@@ -140,4 +140,4 @@ function evaluate(topStr, bottomStr, id) {
     }
 }
 
-export { isValid, getFinalScore, evaluate, getGameNum, getScore }
+export { isValid, getFinalScore, evaluate, getGameId, getScore }
