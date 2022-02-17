@@ -4,7 +4,7 @@ export const statisticsSlice = createSlice({
     name: 'statistics',
     initialState: {
         played: 0,
-        lastPlayed: '1970-01-01',
+        lastPlayed: 0,
         wins: 0,
         currentStreak: 0,
         maxStreak: 0,
@@ -17,6 +17,7 @@ export const statisticsSlice = createSlice({
             "6": 0
         },
         currentGame: {
+            gameNum: 0,
             input: 0,
             guesses: 0,
             boards: []
@@ -25,9 +26,12 @@ export const statisticsSlice = createSlice({
         hasWon: false
     },
     reducers: {
-        startGame: (state) => {
+        startGame: (state, action) => {
             state.gameFinished = false;
             state.hasWon = false;
+            if (!action.payload) {
+                state.currentStreak = 0
+            }
         },
         completeGame: (state, action) => {
             state.gameFinished = true

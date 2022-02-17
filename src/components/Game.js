@@ -1,26 +1,31 @@
 import React, { useState } from 'react';
 import Scoreboard from './Scoreboard';
 
-import { isValid, getFinalScore, evaluate, getScore } from '../services/GameEngine'
+import { isValid, getFinalScore, evaluate, getScore, getGameNum } from '../services/GameEngine'
 import toast from 'react-hot-toast';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { startGame, completeGame, submitGuess } from '../features/statistics/statisticsSlice';
 
 export default function Game(props) {
+    const [gameNum, setGameNum] = useState(getGameNum())
     const lastPlayed = useSelector((state) => state.statistics.lastPlayed)
     const currentGame = useSelector((state) => state.statistics.currentGame)
     const dispatch = useDispatch()
 
-    const currentDate = (new Date()).toISOString().substring(0,10);
-    
     let _scoreboards;
     let _input;
-    if (currentDate === lastPlayed) {
+    if (gameNum === lastPlayed) {
         _scoreboards = currentGame.boards
         _input = currentGame.input
     } else {
-        dispatch(startGame())
+        let continueStreak = false;
+
+        if (lastPlayed+1 === gameNum){ 
+            continueStreak = true;
+        }
+
+        dispatch(startGame(continueStreak))
         _scoreboards = Array(6).fill(Array(8).fill({top:'', bottom: ''}));
         _input = 0
     }
@@ -28,19 +33,19 @@ export default function Game(props) {
     const [currentInput, setCurrentInput] = useState(_input)
     const [scoreboards, setScoreboards] = useState(_scoreboards)
 
-    const finalScore = getFinalScore();
+    const finalScore = getFinalScore(gameNum);
 
-    const toastStyle = { style: { transform: 'translateZ(2px)'} };
+    const toastStyle = {};
 
     function handleSubmit(topScores, bottomScores) {
-        const verify = isValid(topScores, bottomScores)
+        const verify = isValid(topScores, bottomScores, gameNum)
 
         if (!verify.isValid) {
             toast.error(verify.message, toastStyle)
             return;
         }
 
-        const { evalArr, hasWon } = evaluate(topScores, bottomScores)
+        const { evalArr, hasWon } = evaluate(topScores, bottomScores, gameNum)
 
         const newScores = scoreboards.slice(0)
         newScores[currentInput] = evalArr
@@ -54,7 +59,7 @@ export default function Game(props) {
                 <div>Correct Score:
                     <Scoreboard
                         type="display"
-                        score={getScore()}
+                        score={getScore(gameNum)}
                         finalScore={finalScore}
                     />
                 </div>
@@ -68,20 +73,22 @@ export default function Game(props) {
             }))
             dispatch(submitGuess({
                 currentGame: {
+                    gameNum,
                     guesses: currentInput + 1,
                     input: -1,
                     boards: newScores
                 },
-                lastPlayed: currentDate
+                lastPlayed: gameNum
             }))
         } else {
             dispatch(submitGuess({
                 currentGame: {
+                    gameNum,
                     guesses: currentInput+1,
                     input: currentInput+1,
                     boards: newScores,
                 },
-                lastPlayed: currentDate
+                lastPlayed: gameNum
             }))
             setCurrentInput(currentInput+1)
         }

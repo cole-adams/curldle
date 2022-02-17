@@ -12,8 +12,8 @@ function getGameNum() {
     return days
 }
 
-function getTodaysGame() {
-    const game = games.games[getGameNum() % games.games.length]
+function getGame(id) {
+    const game = games.games[id % games.games.length]
 
     const scoresAsNum = game.map(arr => {
         return arr.map(item => {
@@ -23,16 +23,16 @@ function getTodaysGame() {
     return scoresAsNum;
 }
 
-function getFinalScore() {
-    const score = getTodaysGame()
+function getFinalScore(id) {
+    const score = getGame(id)
     return {
         top: score[0].reduce(sum),
         bottom: score[1].reduce(sum)
     }
 }
 
-function getScore() {
-    const game = getTodaysGame()
+function getScore(id) {
+    const game = getGame(id)
     const out = []
     for (let i = 0; i < game[0].length; i++) {
         out.push({
@@ -44,7 +44,7 @@ function getScore() {
     return out
 }
 
-function isValid(top, bottom) {
+function isValid(top, bottom, id) {
     const topNums = [];
     const bottomNums = [];
 
@@ -73,7 +73,7 @@ function isValid(top, bottom) {
         topNums.push(topNum);
         bottomNums.push(botNum);
     }
-    const finalScore = getFinalScore()
+    const finalScore = getFinalScore(id)
 
     if (topNums.reduce(sum) !== finalScore.top || 
         bottomNums.reduce(sum) !== finalScore.bottom) {
@@ -88,8 +88,8 @@ function isValid(top, bottom) {
     }
 }
 
-function evaluate(topStr, bottomStr) {
-    const score = getTodaysGame()
+function evaluate(topStr, bottomStr, id) {
+    const score = getGame(id)
     const top = topStr.map(item => Number.parseInt(item))
     const bottom = bottomStr.map(item => Number.parseInt(item))
 

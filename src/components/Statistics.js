@@ -36,7 +36,7 @@ export default function Statistics() {
     }
 
     function handleClick() {
-        let result = `Curldle ${getGameNum()} ${hasWon?currentGame.guesses:'X'}/6\n`
+        let result = `Curldle ${currentGame.gameNum} ${hasWon?currentGame.guesses:'X'}/6\n`
         for (let i = 0; i < currentGame.guesses; i++) {
             const board = currentGame.boards[i]
             result+='\n'
