@@ -33,11 +33,11 @@
 }
 
 .face__back {
-    transform: rotateY(180deg);
+    transform: rotateX(180deg);
 }
 
 .container.is-flipped {
-    transform: rotateY(180deg);
+    transform: rotateX(180deg);
 }
 
 .seperator {
