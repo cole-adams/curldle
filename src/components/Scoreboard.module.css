@@ -12,6 +12,7 @@
     font-size: 1.17em;
     border: none;
     text-align: center;
+    padding: 0px;
 }
 
 .input:focus{

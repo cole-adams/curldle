@@ -13,11 +13,7 @@ function getGameNum() {
 }
 
 function getTodaysGame() {
-    const now = new Date();
-    const timezoneOffsetMS = now.getTimezoneOffset() * 6e4
-    const daysSinceEpoch = Math.floor((now-timezoneOffsetMS)/8.64e7) //number of milliseconds in a day
-    
-    const game = games.games[daysSinceEpoch % games.games.length]
+    const game = games.games[getGameNum() % games.games.length]
 
     const scoresAsNum = game.map(arr => {
         return arr.map(item => {

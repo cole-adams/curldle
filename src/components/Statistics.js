@@ -97,9 +97,6 @@ export default function Statistics() {
                 handleClose={toggleModal}
                 content={modalContent}
             />
-            <Toaster
-                position="top-center"
-            />
         </div>
     )
 }

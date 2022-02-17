@@ -30,7 +30,7 @@ export default function Game(props) {
 
     const finalScore = getFinalScore();
 
-    const toastStyle = {};
+    const toastStyle = { style: { transform: 'translateZ(2px)'} };
 
     function handleSubmit(topScores, bottomScores) {
         const verify = isValid(topScores, bottomScores)
@@ -112,10 +112,10 @@ export default function Game(props) {
 
     return (
         <div>
-            {scoreboardEls}
             <Toaster
                 position="top-center"
             />
+            {scoreboardEls}
         </div>
     )
 }
