@@ -3,7 +3,7 @@ import Icon from "@mdi/react"
 import { mdiChartBar, mdiShareVariant } from "@mdi/js"
 
 import Modal from "./Modal"
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 import styles from "./Statistics.module.css"
 
