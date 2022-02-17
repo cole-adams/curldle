@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { startGame, completeGame, submitGuess } from '../features/statistics/statisticsSlice';
 
 export default function Game(props) {
-    const [gameNum, setGameNum] = useState(getGameNum())
+    const [gameNum] = useState(getGameNum())
     const lastPlayed = useSelector((state) => state.statistics.lastPlayed)
     const currentGame = useSelector((state) => state.statistics.currentGame)
     const dispatch = useDispatch()

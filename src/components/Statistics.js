@@ -9,8 +9,6 @@ import styles from "./Statistics.module.css"
 
 import { useSelector } from "react-redux"
 
-import { getGameNum } from "../services/GameEngine"
-
 export default function Statistics() {
     const [showModal, setShowModal] = useState(false)
     const played = useSelector((state) => state.statistics.played)
