@@ -1,6 +1,6 @@
 .scene {
-    width: 32px;
-    height: 85px;
+    width: 38px;
+    height: 100px;
     perspective: none;
 }
 
@@ -24,7 +24,6 @@
     width: 100%;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    z-index: 1;
     border-radius: 3px;
 }
 
@@ -33,11 +32,11 @@
 }
 
 .face__back {
-    transform: rotateX(180deg);
+    transform: rotateY(180deg) translateZ(1px);
 }
 
 .container.is-flipped {
-    transform: rotateX(180deg);
+    transform: rotateY(180deg);
 }
 
 .seperator {
@@ -50,14 +49,12 @@
 
 .score {
     margin: 4px;
-    height: 20px;
-    font-size: 1em;
+    height: 24px;
     text-align: center;
 }
 
 .end-title {
     margin: 4px 0px;
-    font-size: 0.8em;
 }
 
 .correct {
