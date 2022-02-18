@@ -1,10 +1,10 @@
 .scene {
-    width: 38px;
-    height: 98px;
     perspective: none;
 }
 
 .container {
+    width: 38px;
+    height: 98px;
     height: 100%;
     position: relative;
     border: 2px solid var(--tile-border);
@@ -12,31 +12,10 @@
     color: white;
     text-align: center;
     margin: -1px;
-    background-color: var(--tile-background);
-
-    transition: transform 0.5s;
-    transform-style: preserve-3d;
-}
-
-.face {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    border-radius: 3px;
 }
 
 .face__front {
     background-color: var(--tile-background) !important;
-}
-
-.face__back {
-    transform: rotateY(180deg) translateZ(1px);
-}
-
-.container.is-flipped {
-    transform: rotateY(180deg);
 }
 
 .seperator {

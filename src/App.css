@@ -11,6 +11,5 @@
   top:0;
   left:0;
   z-index: 10;
-  transform: translateZ(10px);
   pointer-events: none;
 }

@@ -1,9 +1,10 @@
 import React from "react";
 import styles from "./EndScore.module.css"
 
+import ReactCardFlip from "react-card-flip";
+
 export default function EndScore({end, top, bottom, evaluation}) {
     const colorStyle = evaluation ? styles[evaluation] : '';
-    const flipClass = evaluation ? styles['is-flipped'] : '';
 
     const tileDisplay = (
         <>
@@ -16,11 +17,11 @@ export default function EndScore({end, top, bottom, evaluation}) {
     )
 
     return (
-        <div className={styles.scene}>
-            <div className={`${styles.container} ${flipClass}`}>
-                <div className={`${styles["face"]} ${styles["face__front"]}`}>{ tileDisplay }</div>
-                <div className={`${styles["face"]} ${styles["face__back"]} ${colorStyle}`}>{ evaluation && tileDisplay }</div>
-            </div>
-        </div>
+        <ReactCardFlip
+            isFlipped={evaluation}
+        >
+            <div className={`${styles.container} ${styles["face__front"]}`}> { tileDisplay } </div>
+            <div className={`${styles.container} ${colorStyle}`}>{ evaluation && tileDisplay }</div>
+        </ReactCardFlip>
     )
 }
