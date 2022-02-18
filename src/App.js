@@ -3,6 +3,7 @@ import './App.css';
 import React from 'react';
 import Game from './components/Game';
 import Header from './components/Header';
+import Footer from './components/Footer';
 
 import { Toaster } from 'react-hot-toast';
 
@@ -11,11 +12,12 @@ function App() {
     <div className="App">
       <div className="toast-wrapper">
           <Toaster
-              position="top-center"
+              position="bottom-center"
           />
       </div>
       <Header />
       <Game />
+      <Footer />
     </div>
   )
 }

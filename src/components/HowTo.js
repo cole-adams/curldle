@@ -60,6 +60,8 @@ export default function HowTo() {
             <hr className={styles.seperator} ></hr>
             <p>The scorelines are sourced from Grand Slam of Curling events.</p>
             <p><strong>There will be a new CURLDLE everyday!</strong></p>
+            <hr className={styles.seperator} ></hr>
+            <p>Made by <a style={{color: 'var(--text-color)'}} href="https://twitter.com/cole_adams1">@cole_adams1</a></p>
         </div>
     )
 
