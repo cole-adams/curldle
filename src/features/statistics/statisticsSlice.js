@@ -18,7 +18,7 @@ export const statisticsSlice = createSlice({
     },
     reducers: {
         startGame: (state, action) => {
-            if (!state.won || state.currentGame.lastGameId + 1 !== action.payload.gameId) {
+            if (!state.won || state.currentGame.gameId + 1 !== action.payload.gameId) {
                 state.currentStreak = 0;
             }
             state.finished = false;
