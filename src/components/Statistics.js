@@ -59,7 +59,7 @@ export default function Statistics() {
                 result+=emoji
             }
         }
-        result+="\nhttps://curldle.netlify.com"
+        result+="\nhttps://curldle.com"
         navigator.clipboard.writeText(result)
         toast('Copied!', {
             icon: '📋'

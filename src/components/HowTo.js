@@ -44,6 +44,9 @@ export default function HowTo() {
             <p>The top team always has Last Shot First End (Hammer).</p>
             <p>Every game is a full 8-end game (no conceded games or extra ends).</p>
             <p>After each guess, the color of the tiles will change to show how close your guess was to the score.</p>
+            <p><span style={{color: 'var(--color-correct', fontWeight: 'bold'}}>Blue</span> means that score occured in that end.</p>
+            <p><span style={{color: 'var(--color-present', fontWeight: 'bold'}}>Red</span> means that score occured in the game, but not in the end its placed</p>
+            <p><span style={{color: 'var(--color-none', fontWeight: 'bold'}}>Black</span> means that score never occurs in the game.</p>
             <hr className={styles.seperator} ></hr>
             <h3 className={styles.title}>Example</h3>
             <Scoreboard 
