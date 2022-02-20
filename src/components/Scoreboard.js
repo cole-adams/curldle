@@ -16,7 +16,7 @@ export default function Scoreboard(props) {
                 return (
                     <input 
                         ref={el => inputRefs.current[(2*i+bot)] = el}
-                        type="tel"
+                        type="tel" 
                         className={styles.input}
                         onKeyDown={e => { handleKeyDown(e, (2*i+bot))}}
                         onInput={e => { handleUpdate(e, (2*i+bot))}}
