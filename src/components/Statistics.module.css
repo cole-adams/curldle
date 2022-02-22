@@ -29,6 +29,7 @@
 .title {
     margin: 0;
     font-size: 1.25em;
+    margin-bottom: 8px;
 }
 
 .share {
@@ -47,4 +48,14 @@
 
 .share:hover {
     opacity: 0.9;
+}
+
+hr {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+    border-color: var(--tile-border);
+    border-style: solid;
+    background-color: var(--tile-border);
+    margin: 20px 0px;
 }

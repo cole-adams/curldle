@@ -8,6 +8,7 @@ import toast from 'react-hot-toast';
 import styles from "./Statistics.module.css"
 
 import { useSelector } from "react-redux"
+import { getGame, getGameId } from "../services/GameEngine";
 
 export default function Statistics() {
     const [showModal, setShowModal] = useState(false)
@@ -22,6 +23,8 @@ export default function Statistics() {
     const currentGame = useSelector((state) => state.statistics.currentGame)
 
     const [showModalTimer, setShowModalTimer] = useState(null);
+
+    const gameInfo = getGame(getGameId())
 
     useEffect(() => {
         if (gameFinished) {
@@ -77,13 +80,21 @@ export default function Statistics() {
                 <div className={styles["num-stats_item"]}><h1>{currentStreak}</h1><p>Current Streak</p></div>
                 <div className={styles["num-stats_item"]}><h1>{maxStreak}</h1><p>Max Streak</p></div>
             </div>
-            { gameFinished && <button className={styles.share} onClick={handleClick}>
-                SHARE
-                <Icon
-                    path={mdiShareVariant}
-                    size={1}
-                />
-            </button>}
+            { gameFinished && 
+                <>
+                    <button className={styles.share} onClick={handleClick}>
+                        SHARE
+                        <Icon
+                            path={mdiShareVariant}
+                            size={1}
+                        />
+                    </button>
+                    <hr />
+                    <h2 className={styles.title}>Today's Game</h2>
+                    <a href={gameInfo.link} target="_blank" rel="noreferrer noopener">{gameInfo.topTeam} vs. {gameInfo.bottomTeam}</a>
+                    <p>in the {gameInfo.year} {gameInfo.eventName}</p>
+                </>
+            }
         </div>
     )
 

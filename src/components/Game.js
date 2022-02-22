@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Scoreboard from './Scoreboard';
 
-import { isValid, getFinalScore, evaluate, getScore, getGameId } from '../services/GameEngine'
+import { isValid, getFinalScore, evaluate, getFormattedScore, getGameId } from '../services/GameEngine'
 import toast from 'react-hot-toast';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -79,7 +79,7 @@ export default function Game(props) {
                 <div>Correct Score:
                     <Scoreboard
                         type="display"
-                        score={getScore(gameId)}
+                        score={getFormattedScore(gameId)}
                         finalScore={finalScore}
                     />
                 </div>
