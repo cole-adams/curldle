@@ -1,4 +1,8 @@
-import games from '../data/games.json';
+import gamesData from '../data/games.json';
+
+const GAME_FORMAT_CHANGE_ID = 7;
+
+const games = gamesData.games;
 
 const sum = (pre, cur) => pre+cur;
 
@@ -13,9 +17,13 @@ function getGameId() {
 }
 
 function getGame(id) {
-    const game = games.games[id % games.games.length]
+    const game = games[(id-GAME_FORMAT_CHANGE_ID) % games.length]
+    return game;
+}
 
-    const scoresAsNum = game.map(arr => {
+function getGameScore(id) {
+    const game = getGame(id)
+    const scoresAsNum = game.score.map(arr => {
         return arr.map(item => {
             return parseInt(item)
         })
@@ -24,15 +32,15 @@ function getGame(id) {
 }
 
 function getFinalScore(id) {
-    const score = getGame(id)
+    const score = getGameScore(id)
     return {
         top: score[0].reduce(sum),
         bottom: score[1].reduce(sum)
     }
 }
 
-function getScore(id) {
-    const game = getGame(id)
+function getFormattedScore(id) {
+    const game = getGameScore(id)
     const out = []
     for (let i = 0; i < game[0].length; i++) {
         out.push({
@@ -89,7 +97,7 @@ function isValid(top, bottom, id) {
 }
 
 function evaluate(topStr, bottomStr, id) {
-    const score = getGame(id)
+    const score = getGameScore(id)
     const top = topStr.map(item => Number.parseInt(item))
     const bottom = bottomStr.map(item => Number.parseInt(item))
 
@@ -140,4 +148,4 @@ function evaluate(topStr, bottomStr, id) {
     }
 }
 
-export { isValid, getFinalScore, evaluate, getGameId, getScore }
+export { isValid, getFinalScore, evaluate, getGameId, getFormattedScore, getGame }
