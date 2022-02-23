@@ -42,7 +42,7 @@ export default function Statistics() {
         setShowModal(!showModal);
     }
 
-    function handleClick() {
+    async function handleClick() {
         let result = `Curldle ${currentGame.gameId} ${hasWon?currentGame.gameGuesses.length:'X'}/6\n`
         for (let i = 0; i < currentGame.gameGuesses.length; i++) {
             const board = currentGame.gameGuesses[i]
@@ -63,7 +63,7 @@ export default function Statistics() {
             }
         }
         result+="\nhttps://curldle.com"
-        navigator.clipboard.writeText(result)
+        await navigator.clipboard.writeText(result)
         toast('Copied!', {
             icon: '📋'
         })   
