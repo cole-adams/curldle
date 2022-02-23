@@ -42,7 +42,7 @@ export default function Statistics() {
         setShowModal(!showModal);
     }
 
-    async function handleClick() {
+    function handleClick() {
         let result = `Curldle ${currentGame.gameId} ${hasWon?currentGame.gameGuesses.length:'X'}/6\n`
         for (let i = 0; i < currentGame.gameGuesses.length; i++) {
             const board = currentGame.gameGuesses[i]
@@ -63,10 +63,16 @@ export default function Statistics() {
             }
         }
         result+="\nhttps://curldle.com"
-        await navigator.clipboard.writeText(result)
-        toast('Copied!', {
-            icon: '📋'
-        })   
+        navigator.clipboard.writeText(result)
+            .then(() => {
+                toast('Copied!', {
+                    icon: '📋'
+                })   
+            })
+            .catch(() => {
+                toast.error('Share Failed. If you are on an embedded browser, try using your default browser.')
+            })
+        
     }
 
     const winPercent = played === 0? 0 : Math.round((wins/played)*100);
