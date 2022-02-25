@@ -1,11 +1,12 @@
 import React from 'react';
 
-import "./Footer.module.css";
-
 export default function Footer() {
     return (
-        <footer>
-            <p>❤️ <strong>CURLDLE</strong>? - <a href="https://ko-fi.com/coleadams">Buy me a ☕</a></p>
+        <footer className="m-4">
+            <p>
+                ❤️<strong>CURLDLE</strong>? - 
+                <a className="underline" href="https://ko-fi.com/coleadams">Buy me a ☕</a>
+            </p>
         </footer>
     )
 }
