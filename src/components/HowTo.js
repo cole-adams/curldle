@@ -29,7 +29,7 @@ export default function HowTo() {
         setShowModal(!showModal);
     }
 
-    const seperator = <hr className="border border-navy-400"></hr>
+    const seperator = <hr className="border border-navy-400 my-2"></hr>
 
     const modalContent = (
         <div>
