@@ -5,8 +5,6 @@ import { mdiChartBar, mdiShareVariant } from "@mdi/js"
 import Modal from "./Modal"
 import toast from 'react-hot-toast';
 
-import styles from "./Statistics.module.css"
-
 import { useSelector } from "react-redux"
 import { getGame, getGameId } from "../services/GameEngine";
 
@@ -78,26 +76,26 @@ export default function Statistics() {
     const winPercent = played === 0? 0 : Math.round((wins/played)*100);
 
     const modalContent = (
-        <div className={styles.container}>
-            <h2 className={styles.title}>Statistics</h2>
-            <div className={styles["num-stats"]}>
-                <div className={styles["num-stats_item"]}><h1>{played}</h1><p>Played</p></div>
-                <div className={styles["num-stats_item"]}><h1>{winPercent}</h1><p>Win %</p></div>
-                <div className={styles["num-stats_item"]}><h1>{currentStreak}</h1><p>Current Streak</p></div>
-                <div className={styles["num-stats_item"]}><h1>{maxStreak}</h1><p>Max Streak</p></div>
+        <div className="flex flex-col items-center">
+            <h2 className="font-bold text-xl mb-2">Statistics</h2>
+            <div className="flex justify-center mb-4">
+                <div className="flex flex-col items-center text-center m-2"><h1 className="font-bold text-2xl">{played}</h1><p>Played</p></div>
+                <div className="flex flex-col items-center text-center m-2"><h1 className="font-bold text-2xl">{winPercent}</h1><p>Win %</p></div>
+                <div className="flex flex-col items-center text-center m-2"><h1 className="font-bold text-2xl">{currentStreak}</h1><p>Current Streak</p></div>
+                <div className="flex flex-col items-center text-center m-2"><h1 className="font-bold text-2xl">{maxStreak}</h1><p>Max Streak</p></div>
             </div>
             { gameFinished && 
                 <>
-                    <button className={styles.share} onClick={handleClick}>
+                    <button className="bg-sky text-white flex items-center cursor-pointer rounded-md text-xl font-bold tap-highlight p-2 hover:opacity-90" onClick={handleClick}>
                         SHARE
                         <Icon
                             path={mdiShareVariant}
                             size={1}
                         />
                     </button>
-                    <hr />
-                    <h2 className={styles.title}>Today's Game</h2>
-                    <a href={gameInfo.link} target="_blank" rel="noreferrer noopener">{gameInfo.topTeam} vs. {gameInfo.bottomTeam}</a>
+                    <hr className="my-4 mx-auto w-full"></hr>
+                    <h2 className="font-bold text-xl mb-2">Today's Game</h2>
+                    <a className="underline" href={gameInfo.link} target="_blank" rel="noreferrer noopener">{gameInfo.topTeam} vs. {gameInfo.bottomTeam}</a>
                     <p>in the {gameInfo.year} {gameInfo.eventName}</p>
                 </>
             }
@@ -106,7 +104,7 @@ export default function Statistics() {
 
     return (
         <div>
-            <div className={styles.icon}>
+            <div className="cursor-pointer">
                 <Icon
                     path={mdiChartBar}
                     size={1}

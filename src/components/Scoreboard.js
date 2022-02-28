@@ -1,8 +1,6 @@
 import React, { useRef } from "react"
 import EndScore from "./EndScore"
 
-import styles from "./Scoreboard.module.css"
-
 export default function Scoreboard(props) {
     let getTop;
     let getBottom;
@@ -14,10 +12,10 @@ export default function Scoreboard(props) {
         const inputDef = (bot) => {
             return (i) => {
                 return (
-                    <input 
+                    <input
+                        className="bg-concrete w-6 h-[26px] text-white font-bold text-lg text-center focus:outline-none" 
                         ref={el => inputRefs.current[(2*i+bot)] = el}
                         type="tel" 
-                        className={styles.input}
                         onKeyDown={e => { handleKeyDown(e, (2*i+bot))}}
                         onInput={e => { handleUpdate(e, (2*i+bot))}}
                         onFocus={handleFocus}
@@ -97,7 +95,7 @@ export default function Scoreboard(props) {
 
     return (
         <>
-        <div className={styles.container}>
+        <div className="flex mb-3">
             {renderEndScores()}
             <EndScore
                 key={11}
@@ -109,7 +107,7 @@ export default function Scoreboard(props) {
         </div>
         { props.type === 'input' && 
             <button
-                className={styles.submit}
+                className="bg-sky text-white w-full rounded-md cursor-pointer text-lg font-bold h-9 mb-3 tap-highlight hover:opacity-90"
                 onClick={submit}
             >Submit</button>
         }
