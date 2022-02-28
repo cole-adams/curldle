@@ -22,13 +22,13 @@ export default function EndScore({end, top, bottom, evaluation}) {
     const tileDisplay = (
         <>
             <p className="mx-1 text-sm">{end}</p>
-            <hr className="border-navy-400 border m-0"></hr>
+            <hr className="border-navy-400 border m-0 bg-navy-400"></hr>
             <h3 className="m-1 text-center h-7 font-bold text-lg">{top}</h3>
-            <hr className="border-navy-400 border m-0"></hr>
+            <hr className="border-navy-400 border m-0 bg-navy-400"></hr>
             <h3 className="m-1 text-center h-7 font-bold text-lg">{bottom}</h3>
         </>
     )
-
+    
     return (
         <ReactCardFlip
             isFlipped={evaluation}
