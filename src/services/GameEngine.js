@@ -1,23 +1,23 @@
 import gamesData from '../data/games.json';
 
-const GAME_FORMAT_CHANGE_ID = 7;
+const GAME_FORMAT_CHANGE_ID = 369;
 
 const games = gamesData.games;
 
-const sum = (pre, cur) => pre+cur;
+const sum = (pre, cur) => pre + cur;
 
 function getGameId() {
     const firstDay = Date.parse('2022-02-15');
-    
+
     const now = new Date();
     const timezoneOffsetMS = now.getTimezoneOffset() * 6e4
-    
-    const days = Math.floor((now - (firstDay + timezoneOffsetMS))/8.64e7)
+
+    const days = Math.floor((now - (firstDay + timezoneOffsetMS)) / 8.64e7)
     return days
 }
 
 function getGame(id) {
-    const game = games[(id-GAME_FORMAT_CHANGE_ID) % games.length]
+    const game = games[(id - GAME_FORMAT_CHANGE_ID) % games.length]
     return game;
 }
 
@@ -63,10 +63,10 @@ function isValid(top, bottom, id) {
         if (bottom[i] === '') {
             bottom[i] = '0'
         }
-        if (top[i]!=='0' && bottom[i]!=='0') {
+        if (top[i] !== '0' && bottom[i] !== '0') {
             return {
                 isValid: false,
-                message: `Invalid. Both teams can't score in end ${i+1}`
+                message: `Invalid. Both teams can't score in end ${i + 1}`
             }
         }
         const topNum = Number.parseInt(top[i])
@@ -75,7 +75,7 @@ function isValid(top, bottom, id) {
         if (topNum < 0 || botNum < 0 || topNum > 8 || botNum > 8) {
             return {
                 isValid: false,
-                message: `Invalid score in end ${i+1}`
+                message: `Invalid score in end ${i + 1}`
             }
         }
         topNums.push(topNum);
@@ -83,7 +83,7 @@ function isValid(top, bottom, id) {
     }
     const finalScore = getFinalScore(id)
 
-    if (topNums.reduce(sum) !== finalScore.top || 
+    if (topNums.reduce(sum) !== finalScore.top ||
         bottomNums.reduce(sum) !== finalScore.bottom) {
         return {
             isValid: false,
@@ -122,7 +122,7 @@ function evaluate(topStr, bottomStr, id) {
         if (evalArr[i]) {
             continue;
         }
-        for(let j = 0; j < top.length; j++) {
+        for (let j = 0; j < top.length; j++) {
             if (!scoreUsed[j] && top[i] === score[0][j] && bottom[i] === score[1][j]) {
                 scoreUsed[j] = true
                 evalArr[i] = {
