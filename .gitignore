@@ -23,3 +23,4 @@ yarn-debug.log*
 yarn-error.log*
 
 /src/data/games-legacy.json
+/src/data/games-year1.json
