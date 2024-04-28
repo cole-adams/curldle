@@ -7,7 +7,7 @@ const games = gamesData.games;
 const sum = (pre, cur) => pre + cur;
 
 function getGameId() {
-  const firstDay = Date.parse("2022-02-13");
+  const firstDay = Date.parse("2022-02-12");
 
   const now = new Date();
   const timezoneOffsetMS = now.getTimezoneOffset() * 6e4;
